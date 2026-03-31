@@ -57,5 +57,11 @@ def visualize_data(datos_creditos: str = "data/raw/datos_creditos.csv",
     plt.savefig(output_dir / 'correlation_heatmap_tarjetas.png')
     plt.close()
 
+    ##################################################################################s
+    # TODO: Agregar al menos dos (2) gráficos adicionales que consideren variables.
+    # OPCIÓN EXTRA (ejemplo):  agregar la generación del reporte con ydata-profiling.
+    ##################################################################################
+
+
 if __name__ == "__main__":
     visualize_data()
