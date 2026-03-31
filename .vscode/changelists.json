@@ -1,0 +1,15 @@
+{
+  "changelists": [
+    {
+      "name": "Default",
+      "files": [
+        "notebooks/CD01_Visualizacion.ipynb",
+        "notebooks/CD02_Procesamiento.ipynb",
+        ".vscode/changelists.json",
+        "src/data_visualiztion.py",
+        "docs/figures/target_distribution.png"
+      ]
+    }
+  ],
+  "active": "Default"
+}
