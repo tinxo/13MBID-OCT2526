@@ -3,7 +3,8 @@
     {
       "name": "Default",
       "files": [
-        "src/data_visualiztion.py"
+        ".vscode/changelists.json",
+        "test/test_data_quality.py"
       ]
     }
   ],
