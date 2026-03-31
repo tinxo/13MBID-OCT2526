@@ -4,10 +4,11 @@
       "name": "Default",
       "files": [
         "notebooks/CD01_Visualizacion.ipynb",
-        "notebooks/CD02_Procesamiento.ipynb",
-        ".vscode/changelists.json",
-        "src/data_visualiztion.py",
-        "docs/figures/target_distribution.png"
+        "docs/figures/target_distribution.png",
+        "docs/figures/correlation_heatmap_creditos.png",
+        "docs/figures/correlation_heatmap_tarjetas.png",
+        "dvc.yml",
+        ".vscode/changelists.json"
       ]
     }
   ],
