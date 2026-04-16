@@ -54,19 +54,50 @@ def test_great_expectations():
 
     
     # Atributo a analizar: Exactitud (rangos de valores en datos)
+    # Validación 1: Rango de edad (18-100 años)
+    edad_valida = df_creditos["edad"].between(18, 100).all()
+    mensaje_edad = ""
+    if not edad_valida:
+        edades_fuera = df_creditos[(df_creditos["edad"] < 18) | (df_creditos["edad"] > 100)]["edad"].unique()
+        mensaje_edad = f"Edades fuera de rango encontradas: {sorted(edades_fuera)}"
     add_expectation(
-        "rango_edad", # Verificar que la edad esté entre 18 y 100 años
-        df_creditos["edad"].between(90, 100).all(), # La validación a realizar
-        "La edad debe estar entre 18 y 100 años." # Mensaje de error en caso de que la validación falle
+        "rango_edad",
+        edad_valida,
+        f"La edad debe estar entre 18 y 100 años. {mensaje_edad}"
     )
+   
+    # Validación 2: Rango de valores para situación de vivienda (ALQUILER, PROPIA, OTROS, HIPOTECA)
+    vivienda_valida = df_creditos["situacion_vivienda"].isin(["ALQUILER", "PROPIA", "OTROS", "HIPOTECA"]).all()
+    mensaje_vivienda = ""
+    if not vivienda_valida:
+        viviendas_fuera = df_creditos[~df_creditos["situacion_vivienda"].isin(["ALQUILER", "PROPIA", "OTROS", "HIPOTECA"])]["situacion_vivienda"].unique()
+        mensaje_vivienda = f"Situaciones de vivienda no válidas encontradas: {sorted(viviendas_fuera)}" 
     add_expectation(
-        "situacion_vivienda", # Verificar que la situación de vivienda sea una de las categorías válidas
-        df_creditos["situacion_vivienda"].isin(["ALQUILER", "PROPIA", "OTROS"]).all(), # La validación a realizar
-        "La situación de vivienda no se encuentra en el rango válido."
+        "situacion_vivienda",
+        vivienda_valida,
+        f"La situación de vivienda no se encuentra en el rango válido. {mensaje_vivienda}"
     )
+
+    # Resumen y validación final
+    print("\n" + "="*70)
+    print("RESUMEN DE VALIDACIONES")
+    print("="*70)
+    for exp in results["expectations"]:
+        status = "✓ PASS" if exp["success"] else "✗ FAIL"
+        print(f"{status}: {exp['expectation']}")
+        if not exp["success"] and "message" in exp:
+            print(f"       Detalle: {exp['message']}")
+    print(f"\nTotal: {results['statistics']['success_count']}/{results['statistics']['total_count']} validaciones pasaron")
+    print("="*70 + "\n")
+
+    # El test falla si alguna validación no pasó
+    assert results["success"], f"Se encontraron {results['statistics']['total_count'] - results['statistics']['success_count']} validaciones fallidas"
+
+
 
     #############################################################################
     # TODO: Agregar al menos dos (2) validaciones más para el dataset de tarjetas.
-    # Por ejemplo: rangos de valores para el atrbuto de límite de crédito o el estado_civil o nivel de estudios.
+    # Por ejemplo: rangos de valores para el atrbuto de límite de crédito o el 
+    #               estado_civil o nivel de estudios.
     ##############################################################################
 
