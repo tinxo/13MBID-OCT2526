@@ -76,6 +76,11 @@ def process_data(datos_creditos: str = "data/raw/datos_creditos.csv",
     ####################################################################
     df_integrado.to_csv(output_dir + 'datos_integrados.csv', index=False)
 
+    ##################################################################################
+    # OPCIÓN EXTRA (ejemplo):  agregar la generación del reporte de metadatos a un txt 
+    # o HTML con ydata-profiling.
+    ##################################################################################
+
 
 if __name__ == "__main__":
     process_data()  
