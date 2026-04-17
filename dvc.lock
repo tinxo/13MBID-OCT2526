@@ -91,10 +91,38 @@ stages:
       isexec: true
     - path: src/data_prep.py
       hash: md5
-      md5: 45d5d27c407dd15f0fa456dff5a875df
-      size: 4015
+      md5: 6d50e0410d3917717267f4d20a937d4f
+      size: 4314
     outs:
     - path: data/processed/datos_integrados.csv
       hash: md5
       md5: 813b79a617c820c2a8fdd2d3ee006626
       size: 1595717
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed/datos_integrados.csv
+      hash: md5
+      md5: 813b79a617c820c2a8fdd2d3ee006626
+      size: 1595717
+    - path: src/train_model.py
+      hash: md5
+      md5: 99ffe679001af1e9d1b97f9e7b8e8fc6
+      size: 7916
+    outs:
+    - path: docs/figures/confusion_matrix.png
+      hash: md5
+      md5: 71233c950871519f7ae692593ac25511
+      size: 20942
+    - path: metrics/train_metrics.json
+      hash: md5
+      md5: 9fa55f9bcfd00258d65b672502073ac8
+      size: 189
+    - path: models/prod_model.pkl
+      hash: md5
+      md5: fa87c9cb3b5312d2c9c555eaacaba746
+      size: 27046
+    - path: models/prod_preprocessor.pkl
+      hash: md5
+      md5: f549f782f4d2f04187a08d9bd83885be
+      size: 5889
