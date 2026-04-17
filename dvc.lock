@@ -126,3 +126,20 @@ stages:
       hash: md5
       md5: f549f782f4d2f04187a08d9bd83885be
       size: 5889
+  test_model:
+    cmd: pytest --html=docs/report_model.html --self-contained-html test/test_train.py
+      -v || true
+    deps:
+    - path: data/processed/datos_integrados.csv
+      hash: md5
+      md5: 813b79a617c820c2a8fdd2d3ee006626
+      size: 1595717
+    - path: test/test_train.py
+      hash: md5
+      md5: 2802055d657474c09515374fb0598013
+      size: 1591
+    outs:
+    - path: docs/report_model.html
+      hash: md5
+      md5: 20e238f73a7476bf428fa0fdff21c3ec
+      size: 32717
