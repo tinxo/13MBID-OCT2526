@@ -11,6 +11,9 @@ app = FastAPI(
 )
 
 class PredictionRequest(BaseModel):
+    #################################################################################
+    # TODO: adaptar el modelo según los resultados de la fase de preparación de datos
+    ##################################################################################
     edad: int = Field(..., description="Edad del cliente")
     antiguedad_empleado: float = Field(..., description="Antigüedad del empleado")
     situacion_vivienda: str = Field(..., description="Situación de la vivienda")
